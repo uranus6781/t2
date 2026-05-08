@@ -13,10 +13,30 @@ https://example.com/video-cho.mp4
 #EXTIMG:https://ui-avatars.com/api/?name=Inter%20Milan%20U20&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="4" tvg-name="Sku Amstetten vs Sk Austria Klagenfurt" tvg-logo="https://ui-avatars.com/api/?name=Sku%20Amstetten&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sku Amstetten vs Sk Austria Klagenfurt | 20:26 05/08/2300 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Sku%20Amstetten&size=200&background=1a73e8&color=fff&bold=true&format=png
+#EXTINF:-1 tvg-id="4" tvg-name="Sc Bregenz vs Fk Austria Vienna Youth" tvg-logo="https://ui-avatars.com/api/?name=Sc%20Bregenz&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sc Bregenz vs Fk Austria Vienna Youth | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Sc%20Bregenz&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="5" tvg-name="Sv Austria Salzburg vs Austria Lustenau" tvg-logo="https://ui-avatars.com/api/?name=Sv%20Austria%20Salzburg&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sv Austria Salzburg vs Austria Lustenau | 20:26 05/08/2300 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Sv%20Austria%20Salzburg&size=200&background=1a73e8&color=fff&bold=true&format=png
+#EXTINF:-1 tvg-id="5" tvg-name="Spg Wels vs Sturm Graz Youth" tvg-logo="https://ui-avatars.com/api/?name=Spg%20Wels&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Spg Wels vs Sturm Graz Youth | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Spg%20Wels&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="6" tvg-name="Vojvodina Novi Sad vs Fk Ukariki" tvg-logo="https://ui-avatars.com/api/?name=Vojvodina%20Novi%20Sad&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Vojvodina Novi Sad vs Fk Ukariki | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Vojvodina%20Novi%20Sad&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="7" tvg-name="1 Fc Kaiserslautern vs Arminia Bielefeld" tvg-logo="https://ui-avatars.com/api/?name=1%20Fc%20Kaiserslautern&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE 1 Fc Kaiserslautern vs Arminia Bielefeld | 20:26 05/08/2330 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=1%20Fc%20Kaiserslautern&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="8" tvg-name="Sc Paderborn 07 vs Karlsruher Sc" tvg-logo="https://ui-avatars.com/api/?name=Sc%20Paderborn%2007&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sc Paderborn 07 vs Karlsruher Sc | 20:26 05/08/2330 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Sc%20Paderborn%2007&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="9" tvg-name="Bronshoj vs Fa 2000" tvg-logo="https://ui-avatars.com/api/?name=Bronshoj&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Bronshoj vs Fa 2000 | 20:26 05/08/2330 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Bronshoj&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="10" tvg-name="Odder Igf vs If Lyseng" tvg-logo="https://ui-avatars.com/api/?name=Odder%20Igf&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Odder Igf vs If Lyseng | 20:26 05/08/2345 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Odder%20Igf&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
