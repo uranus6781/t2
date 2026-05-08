@@ -13,7 +13,7 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH = "bongda.m3u"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
-LIMIT_MATCHES = 30
+LIMIT_MATCHES = 5
 
 # ==========================================
 # HÀM LẤY LOGO
