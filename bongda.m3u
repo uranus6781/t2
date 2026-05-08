@@ -1,10 +1,22 @@
 #EXTM3U
+#PLAYLIST:Bóng Đá Trực Tiếp - Bún Chả TV
 
-#EXTINF:-1 tvg-id="1" tvg-name="Metallurg Lipetsk vs Fk Spartak Tambov" tvg-logo="https://ui-avatars.com/api/?name=Metallurg%20Lipetsk&size=256&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,⏰ Metallurg Lipetsk vs Fk Spartak Tambov | 20:26 05/08/2200 | Chưa đá
+#EXTINF:-1 tvg-id="1" tvg-name="Metallurg Lipetsk vs Fk Spartak Tambov" tvg-logo="https://ui-avatars.com/api/?name=Metallurg%20Lipetsk&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Metallurg Lipetsk vs Fk Spartak Tambov | 20:26 05/08/2200 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Metallurg%20Lipetsk&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="2" tvg-name="Karlovac vs Rudes" tvg-logo="https://ui-avatars.com/api/?name=Karlovac&size=256&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,⏰ Karlovac vs Rudes | 20:26 05/08/2245 | Chưa đá
+#EXTINF:-1 tvg-id="2" tvg-name="Rakow Czestochowa vs Korona Kielce" tvg-logo="https://ui-avatars.com/api/?name=Rakow%20Czestochowa&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Rakow Czestochowa vs Korona Kielce | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Rakow%20Czestochowa&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="3" tvg-name="Rakow Czestochowa vs Korona Kielce" tvg-logo="https://ui-avatars.com/api/?name=Rakow%20Czestochowa&size=256&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,⏰ Rakow Czestochowa vs Korona Kielce | 20:26 05/08/2300 | Chưa đá
+#EXTINF:-1 tvg-id="3" tvg-name="Inter Milan U20 vs Verona U20" tvg-logo="https://ui-avatars.com/api/?name=Inter%20Milan%20U20&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Inter Milan U20 vs Verona U20 | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Inter%20Milan%20U20&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="4" tvg-name="Sku Amstetten vs Sk Austria Klagenfurt" tvg-logo="https://ui-avatars.com/api/?name=Sku%20Amstetten&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sku Amstetten vs Sk Austria Klagenfurt | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Sku%20Amstetten&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="5" tvg-name="Sv Austria Salzburg vs Austria Lustenau" tvg-logo="https://ui-avatars.com/api/?name=Sv%20Austria%20Salzburg&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sv Austria Salzburg vs Austria Lustenau | 20:26 05/08/2300 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Sv%20Austria%20Salzburg&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
