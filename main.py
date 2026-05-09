@@ -15,7 +15,7 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
-LIMIT_MATCHES = 35 # Tăng số lượng quét cho đủ danh sách của bạn
+LIMIT_MATCHES = 15 # Tăng số lượng quét cho đủ danh sách của bạn
 
 # Ép cứng múi giờ Việt Nam (UTC+7)
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
