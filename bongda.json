@@ -1,42 +1,10 @@
 {
   "playlist_name": "Sang TV",
-  "updated": "14:01 09/05/2026",
+  "updated": "14:21 09/05/2026",
+  "total_matches": 15,
   "matches": [
     {
       "id": "1",
-      "title": "Thespa Kusatsu Gunma vs Tochigi City 1200 09 05 2026",
-      "doi_nha": "Thespa Kusatsu Gunma",
-      "doi_khach": "Tochigi City 1200 09 05 2026",
-      "thoi_gian": "Unknown",
-      "logo_nha": "https://ui-avatars.com/api/?name=Th",
-      "logo_khach": "https://ui-avatars.com/api/?name=To",
-      "stream_url": "https://live.rapidlive.shop/live/648e502b8f2fce4dd88eab5be11e8c49/playlist.m3u8",
-      "link_xem": "https://bunchatv4.net/truc-tiep/thespa-kusatsu-gunma-vs-tochigi-city-1200-09-05-2026/601444801"
-    },
-    {
-      "id": "2",
-      "title": "Hokkaido Consadole Sapporo vs Rb Omiya Ardija 1200 09 05 2026",
-      "doi_nha": "Hokkaido Consadole Sapporo",
-      "doi_khach": "Rb Omiya Ardija 1200 09 05 2026",
-      "thoi_gian": "Unknown",
-      "logo_nha": "https://ui-avatars.com/api/?name=Ho",
-      "logo_khach": "https://ui-avatars.com/api/?name=Rb",
-      "stream_url": "https://live.rapidlive.shop/live/ef1849af10f681d5f91335fb54805528/playlist.m3u8",
-      "link_xem": "https://bunchatv4.net/truc-tiep/hokkaido-consadole-sapporo-vs-rb-omiya-ardija-1200-09-05-2026/601444810"
-    },
-    {
-      "id": "3",
-      "title": "Yushu Tibetan vs Tongliao Tongda 1200 09 05 2026",
-      "doi_nha": "Yushu Tibetan",
-      "doi_khach": "Tongliao Tongda 1200 09 05 2026",
-      "thoi_gian": "Unknown",
-      "logo_nha": "https://ui-avatars.com/api/?name=Yu",
-      "logo_khach": "https://ui-avatars.com/api/?name=To",
-      "stream_url": "https://live.rapidlive.shop/live/14bbf2d46b926886f9ed48b6e6ca5590/playlist.m3u8",
-      "link_xem": "https://bunchatv4.net/truc-tiep/yushu-tibetan-vs-tongliao-tongda-1200-09-05-2026/601456609"
-    },
-    {
-      "id": "4",
       "title": "Para Hills Knlghts Sc vs West Adelaide Sc 1230 09 05 2026",
       "doi_nha": "Para Hills Knlghts Sc",
       "doi_khach": "West Adelaide Sc 1230 09 05 2026",
@@ -47,7 +15,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/para-hills-knlghts-sc-vs-west-adelaide-sc-1230-09-05-2026/601444870"
     },
     {
-      "id": "5",
+      "id": "2",
       "title": "Modbury Jets vs Adelaide Panthers 1230 09 05 2026",
       "doi_nha": "Modbury Jets",
       "doi_khach": "Adelaide Panthers 1230 09 05 2026",
@@ -58,7 +26,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/modbury-jets-vs-adelaide-panthers-1230-09-05-2026/601444873"
     },
     {
-      "id": "6",
+      "id": "3",
       "title": "Salisbury United vs Adelaide Atletico 1230 09 05 2026",
       "doi_nha": "Salisbury United",
       "doi_khach": "Adelaide Atletico 1230 09 05 2026",
@@ -69,7 +37,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/salisbury-united-vs-adelaide-atletico-1230-09-05-2026/601444876"
     },
     {
-      "id": "7",
+      "id": "4",
       "title": "Cooma Tigers U23 vs Belconnen United U23 1230 09 05 2026",
       "doi_nha": "Cooma Tigers U23",
       "doi_khach": "Belconnen United U23 1230 09 05 2026",
@@ -80,7 +48,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/cooma-tigers-u23-vs-belconnen-united-u23-1230-09-05-2026/601459069"
     },
     {
-      "id": "8",
+      "id": "5",
       "title": "Western Springs Afc vs Manukau United 1240 09 05 2026",
       "doi_nha": "Western Springs Afc",
       "doi_khach": "Manukau United 1240 09 05 2026",
@@ -91,7 +59,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/western-springs-afc-vs-manukau-united-1240-09-05-2026/601444879"
     },
     {
-      "id": "9",
+      "id": "6",
       "title": "Queensland Lions W vs Sunshine Coast Wanderers W 1245 09 05 2026",
       "doi_nha": "Queensland Lions W",
       "doi_khach": "Sunshine Coast Wanderers W 1245 09 05 2026",
@@ -102,7 +70,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/queensland-lions-w-vs-sunshine-coast-wanderers-w-1245-09-05-2026/601455163"
     },
     {
-      "id": "10",
+      "id": "7",
       "title": "Adelaide University W vs West Torrens Birkalla W 1245 09 05 2026",
       "doi_nha": "Adelaide University W",
       "doi_khach": "West Torrens Birkalla W 1245 09 05 2026",
@@ -113,7 +81,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/adelaide-university-w-vs-west-torrens-birkalla-w-1245-09-05-2026/601458793"
     },
     {
-      "id": "11",
+      "id": "8",
       "title": "Auckland Fc vs Adelaide United 1300 09 05 2026",
       "doi_nha": "Auckland Fc",
       "doi_khach": "Adelaide United 1300 09 05 2026",
@@ -124,7 +92,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/auckland-fc-vs-adelaide-united-1300-09-05-2026/601444885"
     },
     {
-      "id": "12",
+      "id": "9",
       "title": "Heidelberg United W vs Essendon Royals W 1315 09 05 2026",
       "doi_nha": "Heidelberg United W",
       "doi_khach": "Essendon Royals W 1315 09 05 2026",
@@ -135,7 +103,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/heidelberg-united-w-vs-essendon-royals-w-1315-09-05-2026/601439338"
     },
     {
-      "id": "13",
+      "id": "10",
       "title": "Edgeworth Eagles Fc vs Maitland 1330 09 05 2026",
       "doi_nha": "Edgeworth Eagles Fc",
       "doi_khach": "Maitland 1330 09 05 2026",
@@ -146,7 +114,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/edgeworth-eagles-fc-vs-maitland-1330-09-05-2026/601444894"
     },
     {
-      "id": "14",
+      "id": "11",
       "title": "Adamstown Rosebuds Fc vs Belmont Swansea United Sc 1330 09 05 2026",
       "doi_nha": "Adamstown Rosebuds Fc",
       "doi_khach": "Belmont Swansea United Sc 1330 09 05 2026",
@@ -157,7 +125,7 @@
       "link_xem": "https://bunchatv4.net/truc-tiep/adamstown-rosebuds-fc-vs-belmont-swansea-united-sc-1330-09-05-2026/601445041"
     },
     {
-      "id": "15",
+      "id": "12",
       "title": "South Melbourne vs South Island United Fc 1330 09 05 2026",
       "doi_nha": "South Melbourne",
       "doi_khach": "South Island United Fc 1330 09 05 2026",
@@ -166,6 +134,39 @@
       "logo_khach": "https://ui-avatars.com/api/?name=So",
       "stream_url": "https://live.rapidlive.shop/live/7b8c104e204e190c0eb79fb21fe4df47/playlist.m3u8",
       "link_xem": "https://bunchatv4.net/truc-tiep/south-melbourne-vs-south-island-united-fc-1330-09-05-2026/601455166"
+    },
+    {
+      "id": "13",
+      "title": "Adelaide United Fc Youth vs Metrostars Sc 1345 09 05 2026",
+      "doi_nha": "Adelaide United Fc Youth",
+      "doi_khach": "Metrostars Sc 1345 09 05 2026",
+      "thoi_gian": "Unknown",
+      "logo_nha": "https://ui-avatars.com/api/?name=Ad",
+      "logo_khach": "https://ui-avatars.com/api/?name=Me",
+      "stream_url": "https://live.rapidlive.shop/live/d791cd2befc2193a2e88c3bc84010436/playlist.m3u8",
+      "link_xem": "https://bunchatv4.net/truc-tiep/adelaide-united-fc-youth-vs-metrostars-sc-1345-09-05-2026/601444900"
+    },
+    {
+      "id": "14",
+      "title": "Lan Thurston vs Kingborough Lions 1345 09 05 2026",
+      "doi_nha": "Lan Thurston",
+      "doi_khach": "Kingborough Lions 1345 09 05 2026",
+      "thoi_gian": "Unknown",
+      "logo_nha": "https://ui-avatars.com/api/?name=La",
+      "logo_khach": "https://ui-avatars.com/api/?name=Ki",
+      "stream_url": "https://live.rapidlive.shop/live/6b376c8f05b7824ac4fa89edd9854aea/playlist.m3u8",
+      "link_xem": "https://bunchatv4.net/truc-tiep/lan-thurston-vs-kingborough-lions-1345-09-05-2026/601444903"
+    },
+    {
+      "id": "15",
+      "title": "Launceston City W vs Glenorchy Knights W 1345 09 05 2026",
+      "doi_nha": "Launceston City W",
+      "doi_khach": "Glenorchy Knights W 1345 09 05 2026",
+      "thoi_gian": "Unknown",
+      "logo_nha": "https://ui-avatars.com/api/?name=La",
+      "logo_khach": "https://ui-avatars.com/api/?name=Gl",
+      "stream_url": "https://live.rapidlive.shop/live/5fd9ef8e433355dfa6472b85014eed80/playlist.m3u8",
+      "link_xem": "https://bunchatv4.net/truc-tiep/launceston-city-w-vs-glenorchy-knights-w-1345-09-05-2026/601459072"
     }
   ]
 }
