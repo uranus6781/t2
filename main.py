@@ -30,7 +30,7 @@ REPO_NAME    = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH    = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
 
-LIMIT_MATCHES_PER_CHANNEL = 15
+LIMIT_MATCHES_PER_CHANNEL = 5
 MAX_STREAM_WAIT   = 40
 STREAM_POLL_INTERVAL = 1
 
