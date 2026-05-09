@@ -1,42 +1,42 @@
 #EXTM3U
 #PLAYLIST:Bóng Đá Trực Tiếp - Bún Chả TV
 
-#EXTINF:-1 tvg-id="1" tvg-name="Racing Louisville W vs Portland Thorns Fc W" tvg-logo="https://ui-avatars.com/api/?name=Racing%20Louisville%20W&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Racing Louisville W vs Portland Thorns Fc W | 20:26 05/09/0530 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Racing%20Louisville%20W&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="2" tvg-name="Montevideo Wanderers Fc vs Liverpool Uru" tvg-logo="https://ui-avatars.com/api/?name=Montevideo%20Wanderers%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Montevideo Wanderers Fc vs Liverpool Uru | 20:26 05/09/0530 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Montevideo%20Wanderers%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="3" tvg-name="International Miami B vs Chattanooga" tvg-logo="https://ui-avatars.com/api/?name=International%20Miami%20B&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE International Miami B vs Chattanooga | 20:26 05/09/0600 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=International%20Miami%20B&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="4" tvg-name="Metropolitanos Fc vs Estudiantes Merida Fc" tvg-logo="https://ui-avatars.com/api/?name=Metropolitanos%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Metropolitanos Fc vs Estudiantes Merida Fc | 20:26 05/09/0600 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Metropolitanos%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="5" tvg-name="Lexington vs Monterey Bay Fc" tvg-logo="https://ui-avatars.com/api/?name=Lexington&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Lexington vs Monterey Bay Fc | 20:26 05/09/0630 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Lexington&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="6" tvg-name="Banfield vs San Martin Tucuman" tvg-logo="https://ui-avatars.com/api/?name=Banfield&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Banfield vs San Martin Tucuman | 20:26 05/09/0710 | Đang trực tiếp
-#EXTIMG:https://ui-avatars.com/api/?name=Banfield&size=200&background=1a73e8&color=fff&bold=true&format=png
-https://example.com/video-cho.mp4
-
-#EXTINF:-1 tvg-id="7" tvg-name="Colorado Springs Switchbacks Fc vs Orange County Blues Fc" tvg-logo="https://ui-avatars.com/api/?name=Colorado%20Springs%20Switchbacks%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Colorado Springs Switchbacks Fc vs Orange County Blues Fc | 20:26 05/09/0800 | Đang trực tiếp
+#EXTINF:-1 tvg-id="1" tvg-name="Colorado Springs Switchbacks Fc vs Orange County Blues Fc" tvg-logo="https://ui-avatars.com/api/?name=Colorado%20Springs%20Switchbacks%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Colorado Springs Switchbacks Fc vs Orange County Blues Fc | 20:26 05/09/0800 | Đang trực tiếp
 #EXTIMG:https://ui-avatars.com/api/?name=Colorado%20Springs%20Switchbacks%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="8" tvg-name="Mito Hollyhock vs Urawa Red Diamonds" tvg-logo="https://ui-avatars.com/api/?name=Mito%20Hollyhock&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Mito Hollyhock vs Urawa Red Diamonds | 20:26 05/09/1200 | Đang trực tiếp
+#EXTINF:-1 tvg-id="2" tvg-name="Mito Hollyhock vs Urawa Red Diamonds" tvg-logo="https://ui-avatars.com/api/?name=Mito%20Hollyhock&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Mito Hollyhock vs Urawa Red Diamonds | 20:26 05/09/1200 | Đang trực tiếp
 #EXTIMG:https://ui-avatars.com/api/?name=Mito%20Hollyhock&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="9" tvg-name="Jeju Sk Fc vs Football Club Seoul" tvg-logo="https://ui-avatars.com/api/?name=Jeju%20Sk%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Jeju Sk Fc vs Football Club Seoul | 20:26 05/09/1200 | Đang trực tiếp
+#EXTINF:-1 tvg-id="3" tvg-name="Jeju Sk Fc vs Football Club Seoul" tvg-logo="https://ui-avatars.com/api/?name=Jeju%20Sk%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Jeju Sk Fc vs Football Club Seoul | 20:26 05/09/1200 | Đang trực tiếp
 #EXTIMG:https://ui-avatars.com/api/?name=Jeju%20Sk%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
 
-#EXTINF:-1 tvg-id="10" tvg-name="Auckland Fc vs Adelaide United" tvg-logo="https://ui-avatars.com/api/?name=Auckland%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Auckland Fc vs Adelaide United | 20:26 05/09/1300 | Đang trực tiếp
+#EXTINF:-1 tvg-id="4" tvg-name="Auckland Fc vs Adelaide United" tvg-logo="https://ui-avatars.com/api/?name=Auckland%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Auckland Fc vs Adelaide United | 20:26 05/09/1300 | Đang trực tiếp
 #EXTIMG:https://ui-avatars.com/api/?name=Auckland%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="5" tvg-name="Cerezo Osaka vs Vvaren Nagasaki" tvg-logo="https://ui-avatars.com/api/?name=Cerezo%20Osaka&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Cerezo Osaka vs Vvaren Nagasaki | 20:26 05/09/1400 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Cerezo%20Osaka&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="6" tvg-name="Gimcheon Sangmu Football Club vs Incheon United Club" tvg-logo="https://ui-avatars.com/api/?name=Gimcheon%20Sangmu%20Football%20Club&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Gimcheon Sangmu Football Club vs Incheon United Club | 20:26 05/09/1430 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Gimcheon%20Sangmu%20Football%20Club&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="7" tvg-name="Sydney Fc vs Newcastle Jets" tvg-logo="https://ui-avatars.com/api/?name=Sydney%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Sydney Fc vs Newcastle Jets | 20:26 05/09/1640 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Sydney%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="8" tvg-name="Daejeon Citizen vs Pohang Steelers" tvg-logo="https://ui-avatars.com/api/?name=Daejeon%20Citizen&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Daejeon Citizen vs Pohang Steelers | 20:26 05/09/1700 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Daejeon%20Citizen&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="9" tvg-name="Clb Thanh Hoa vs Tt Hanoi" tvg-logo="https://ui-avatars.com/api/?name=Clb%20Thanh%20Hoa&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Clb Thanh Hoa vs Tt Hanoi | 20:26 05/09/1800 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Clb%20Thanh%20Hoa&size=200&background=1a73e8&color=fff&bold=true&format=png
+https://example.com/video-cho.mp4
+
+#EXTINF:-1 tvg-id="10" tvg-name="Ttbd Phu Dong vs Xm Hai Phong Fc" tvg-logo="https://ui-avatars.com/api/?name=Ttbd%20Phu%20Dong&size=200&background=1a73e8&color=fff&bold=true&format=png" group-title="⚽ Bóng Đá Trực Tiếp" ,🔴 LIVE Ttbd Phu Dong vs Xm Hai Phong Fc | 20:26 05/09/1800 | Đang trực tiếp
+#EXTIMG:https://ui-avatars.com/api/?name=Ttbd%20Phu%20Dong&size=200&background=1a73e8&color=fff&bold=true&format=png
 https://example.com/video-cho.mp4
