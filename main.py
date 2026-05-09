@@ -30,7 +30,7 @@ CHANNELS = [
 
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/waiting.mp4"
-LIMIT_MATCHES = 10  # Lấy 20 trận mỗi kênh
+LIMIT_MATCHES = 5  # Lấy 20 trận mỗi kênh
 
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
@@ -97,7 +97,6 @@ def parse_url_to_info(url):
             return "Unknown", "Unknown", "Chưa có lịch"
 
         slug = re.sub(r'-\d{6,}$', '', slug)
-
         time_match = re.search(r"-(\d{4}-\d{2}-\d{2}-\d{4})$", slug)
 
         if time_match:
@@ -117,18 +116,7 @@ def parse_url_to_info(url):
         return "Unknown", "Unknown", "Unknown"
 
 # =========================================================
-# VALIDATE M3U8
-# =========================================================
-
-def validate_m3u8(url):
-    try:
-        r = requests.get(url, headers=_HEADERS, timeout=8)
-        return "#EXTM3U" in r.text
-    except:
-        return False
-
-# =========================================================
-# CAPTURE STREAM (TỐI ƯU SIÊU TỐC CHO HỘI QUÁN TV)
+# CAPTURE STREAM (SIÊU TỐI ƯU CÀO JSON/HTML)
 # =========================================================
 
 def capture_stream(context, match_url):
@@ -141,58 +129,68 @@ def capture_stream(context, match_url):
             url = res.url
             ct = res.headers.get("content-type", "").lower()
             
+            # CHIẾU MỚI 1: Quét thẳng vào gói tin JSON (Cách Hội Quán giấu link)
+            if "json" in ct:
+                body = res.text()
+                # Tìm mọi chuỗi giống link m3u8 trong JSON
+                found = re.findall(r'(https?://[^\s"\'<>]+m3u8[^\s"\'<>]*)', body)
+                for f in found: 
+                    streams.add(f.replace('\\/', '/'))
+
             if ".m3u8" in url.lower() or "mpegurl" in ct or "apple.mpegurl" in ct:
-                if any(bad in url.lower() for bad in ["/ad/", "/ads/", "/vast/", "quangcao", "preroll", "banner"]):
-                    return
                 streams.add(url)
-                print(f"🎯 FOUND M3U8: {url[:60]}... - main.py:148")
         except:
             pass
 
     page.on("response", handle_response)
 
     try:
+        # Bẻ khóa Fetch/XHR
         page.add_init_script("""
         (() => {
             const origFetch = window.fetch;
             window.fetch = async (...args) => {
-                if (typeof args[0] === 'string' && (args[0].includes('.m3u8') || args[0].includes('.flv'))) {
-                    console.log('FETCH:', args[0]);
-                }
                 return origFetch(...args);
             };
             const origOpen = XMLHttpRequest.prototype.open;
             XMLHttpRequest.prototype.open = function(method, url) {
-                if (url.includes('.m3u8') || url.includes('.flv')) console.log('XHR:', url);
                 return origOpen.apply(this, arguments);
             };
         })();
         """)
 
-        page.goto(match_url, wait_until="load", timeout=60000)
-        page.wait_for_timeout(4000)
+        page.goto(match_url, wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_timeout(3000)
 
-        # Xóa các lớp Overlay chống click
+        # CHIÊU MỚI 2: Quét toàn bộ HTML thô của trang để vét link ẩn
+        try:
+            html = page.content()
+            found_in_html = re.findall(r'(https?://[^\s"\'<>]+m3u8[^\s"\'<>]*)', html)
+            for f in found_in_html:
+                streams.add(f.replace('\\/', '/'))
+        except: pass
+
+        # Phá lớp chống click
         try:
             page.evaluate("""
             document.querySelectorAll('*').forEach(el => {
                 const s = window.getComputedStyle(el);
-                if (s.position === 'fixed' && parseInt(s.zIndex) > 999) el.remove();
+                if (s.position === 'fixed' && parseInt(s.zIndex) > 900) el.remove();
             });
             """)
         except: pass
 
-        # Click bạo lực phá Popup
+        # Click phá quảng cáo
         try:
             vp = page.viewport_size
             if vp:
                 cx, cy = vp["width"] // 2, vp["height"] // 2
-                for _ in range(3):
-                    page.mouse.click(cx, cy)
-                    page.wait_for_timeout(1000)
+                page.mouse.click(cx, cy)
+                page.wait_for_timeout(1000)
+                page.mouse.click(cx, cy)
         except: pass
 
-        # Ép tất cả Iframe Play bằng JS
+        # Ép Iframe Play
         for frame in page.frames:
             try:
                 frame.evaluate("""
@@ -204,14 +202,11 @@ def capture_stream(context, match_url):
                 """)
             except: pass
 
-        # Đợi luồng xuất hiện
-        deadline = time.time() + 20
+        deadline = time.time() + 15
         while time.time() < deadline:
-            if streams:
-                # NÂNG CẤP: Chộp ngay lập tức nếu thấy link xịn của Hội Quán TV hoặc Bún Chả
-                fast_exit_keywords = ["edgemaxcdn", "hqtv", "playlist.m3u8", "token=", "sign="]
-                if any(kw in s.lower() for kw in fast_exit_keywords for s in streams):
-                    break
+            # Thoát ngay lập tức nếu tóm được luồng xịn
+            if any("token=" in s.lower() or "sign=" in s.lower() or "edgemax" in s.lower() for s in streams):
+                break
             time.sleep(1)
 
     except PWTimeout:
@@ -221,17 +216,24 @@ def capture_stream(context, match_url):
     finally:
         page.close()
 
-    # CHẤM ĐIỂM LUỒNG TỐI THƯỢNG
+    # ==================================
+    # BỘ CHẤM ĐIỂM THÔNG MINH
+    # ==================================
     if streams:
         priority = []
         for s in streams:
             score = 0
             lower = s.lower()
             
-            # Ưu tiên đỉnh cao cho các domain/cấu trúc xịn
+            # TRỊ BỆNH BÚN CHẢ: Phạt thẻ đỏ các link nền, link chờ trùng lặp
+            if any(bad in lower for bad in ["waiting", "loop", "placeholder", "fallback", "saba.m3u8"]):
+                score -= 5000
+                
+            # Đánh giá cao link Hội Quán
             if "edgemaxcdn" in lower or "hqtv" in lower:
                 score += 3000
-            
+                
+            # Đánh giá cao link có bảo mật chuẩn (Xoilac)
             if "expire=" in lower or "sign=" in lower or "token=" in lower:
                 score += 1000
                 
@@ -240,16 +242,21 @@ def capture_stream(context, match_url):
             elif "index.m3u8" in lower or "chunklist" in lower:
                 score += 100
                 
+            # Cấm ngặt quảng cáo
+            if any(bad in lower for bad in ["/ad/", "/ads/", "/vast/", "quangcao", "preroll", "banner"]):
+                score -= 10000
+
             priority.append((score, s))
 
         priority.sort(reverse=True, key=lambda x: x[0])
-        best = priority[0][1]
+        best_score, best_url = priority[0]
 
-        print(f"      ✅ FINAL STREAM: {best[:60]}...")
-        if validate_m3u8(best):
-            return best
-        return best 
-
+        if best_score > -5000:
+            print(f"      ✅ TÌM THẤY LUỒNG: {best_url[:60]}...")
+            return best_url
+        else:
+            print("      ⚠️ CHỈ TÌM THẤY LUỒNG RÁC/CHỜ")
+            
     return None
 
 # =========================================================
@@ -348,12 +355,12 @@ def scrape_and_push():
             links = []
             seen = set()
 
+            # Quét tìm Link chứa -vs-
             for el in page.locator("a[href*='-vs-']").all():
                 href = el.get_attribute("href")
                 if not href or "-vs-" not in href or href in seen: continue
                 
                 seen.add(href)
-                
                 if not href.startswith("http"):
                     href = channel["base_url"].rstrip('/') + '/' + href.lstrip('/')
                     
