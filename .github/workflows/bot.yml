@@ -2,17 +2,20 @@ name: ⚽ Scrape Bóng Đá M3U8
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Chạy mỗi 30 phút
-  workflow_dispatch:      # Cho phép chạy thủ công
+    - cron: '*/30 * * * *'
+
+  workflow_dispatch:
 
 jobs:
+
   scrape:
+
     runs-on: ubuntu-22.04
+
     timeout-minutes: 20
-    permissions:
-      contents: write     # Quan trọng: Cho phép bot ghi file vào repo
 
     steps:
+
     - name: 📥 Checkout
       uses: actions/checkout@v4
 
@@ -20,41 +23,49 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        cache: 'pip'
 
-    - name: 💾 Cache Playwright Browsers
-      id: playwright-cache
+    - name: 🌐 Install Chrome
+      uses: browser-actions/setup-chrome@v1
+
+    - name: 💾 Cache Playwright
       uses: actions/cache@v4
       with:
         path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+        key: ${{ runner.os }}-playwright
 
     - name: 📦 Install dependencies
       run: |
+
         python -m pip install --upgrade pip
+
         pip install -r requirements.txt
-        # Chỉ cài playwright nếu cache chưa có
-        if [ "${{ steps.playwright-cache.outputs.cache-hit }}" != "true" ]; then
-          playwright install --with-deps chromium
-        else
-          playwright install-deps chromium
-        fi
+
+        playwright install --with-deps chromium
 
     - name: 🚀 Run bot
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }} # Đảm bảo bạn đã add Secret này
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
         GH_REPO: ${{ github.repository }}
+
       run: |
+
         python main.py
 
     - name: 📄 Show output
       run: |
+
         ls -la
-        if [ -f bongda.m3u ]; then
-          echo "✅ bongda.m3u created successfully"
-          echo "--- Preview (First 20 lines) ---"
-          head -n 20 bongda.m3u
+
+        if [ -f bongda.json ]; then
+
+          echo "✅ bongda.json created"
+
+          cat bongda.json | head -20
+
         else
-          echo "❌ bongda.m3u missing"
+
+          echo "❌ bongda.json missing"
+
           exit 1
+
         fi
