@@ -35,7 +35,7 @@ LIMIT_MATCHES = 15  # Tăng giới hạn để không bỏ lỡ trận đấu
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
 GITHUB_TOKEN = os.getenv("GH_TOKEN")
-REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
+REPO_NAME = os.getenv("GH_REPO", "uranus6781/t2")
 
 _HEADERS = {
     "User-Agent": (
