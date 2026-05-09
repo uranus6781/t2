@@ -1,8 +1,8 @@
 {
   "playlist_name": "Sáng TV",
-  "last_updated": "19:41 09/05/2026",
+  "last_updated": "19:53 09/05/2026",
   "total_live": 10,
-  "total_streams": 10,
+  "total_streams": 0,
   "buncha": [
     {
       "id": "1",
@@ -14,7 +14,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Pa&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Ac&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/1e9eb57774fd1cc9dbef3878490a7c76/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/parma-u20-vs-ac-milan-u20-1800-09-05-2026/601445362"
     },
     {
@@ -27,7 +27,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Vf&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Ha&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/02db00f3935617f278ffdb4df6e60b3d/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/vfl-bochum-1848-vs-hannover-96-1800-09-05-2026/601445365"
     },
     {
@@ -40,7 +40,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Ei&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Dy&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/806d74b731710154dce1f84527736203/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/eintracht-braunschweig-vs-dynamo-dresden-1800-09-05-2026/601445368"
     },
     {
@@ -53,7 +53,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Ho&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=1%20&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/cd1cdf84561c2e21cd8b6af9bf4350fc/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/holstein-kiel-vs-1-fc-magdeburg-1800-09-05-2026/601445371"
     },
     {
@@ -66,7 +66,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Ly&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Po&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/707ff1b603d7b02d0926a3c29db1100d/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/lysekloster-vs-pors-grenland-1800-09-05-2026/601445386"
     },
     {
@@ -79,7 +79,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Bk&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Kr&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/957cf24c8b264fb83a7342b4604433b9/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/bk-olympic-vs-kristianstads-ff-1800-09-05-2026/601445404"
     },
     {
@@ -92,7 +92,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Fc&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=So&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/38386e20062a155b86225b0dabc9782e/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/fc-arlanda-vs-sollentuna-united-1800-09-05-2026/601445407"
     },
     {
@@ -105,7 +105,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Um&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Ge&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/305aef1ac41773eb65652481b2d98f09/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/umea-fc-vs-gefle-if-1800-09-05-2026/601445410"
     },
     {
@@ -118,7 +118,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Sl&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Fc&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://live.rapidlive.shop/live/8455bf8164d31e3421b0d93dfb95e8f4/playlist.m3u8",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/slavia-mozyr-vs-fc-minsk-1800-09-05-2026/601445467"
     },
     {
@@ -131,7 +131,7 @@
       "is_live": true,
       "logo_nha": "https://ui-avatars.com/api/?name=Cl&size=200&background=1565C0&color=ffffff&bold=true",
       "logo_khach": "https://ui-avatars.com/api/?name=Tt&size=200&background=1565C0&color=ffffff&bold=true",
-      "stream_url": "https://cdn-hls.taoxanh.biz/live/69ff0aba42283_162172/index.m3u8?expire=1778926906&sign=cb87dca29179df85cbaa91a9398565de",
+      "stream_url": "https://example.com/waiting.mp4",
       "link_xem": "https://bunchatv4.net/truc-tiep/clb-thanh-hoa-vs-tt-hanoi-1800-09-05-2026/601445470"
     }
   ],
