@@ -30,7 +30,7 @@ CHANNELS = [
 
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/waiting.mp4"
-LIMIT_MATCHES = 5  # Lấy 20 trận mỗi kênh
+LIMIT_MATCHES = 10  
 
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
@@ -116,7 +116,7 @@ def parse_url_to_info(url):
         return "Unknown", "Unknown", "Unknown"
 
 # =========================================================
-# CAPTURE STREAM (SIÊU TỐI ƯU CÀO JSON/HTML)
+# CAPTURE STREAM
 # =========================================================
 
 def capture_stream(context, match_url):
@@ -124,53 +124,41 @@ def capture_stream(context, match_url):
     Stealth().apply_stealth_sync(page)
     streams = set()
 
-    def handle_response(res):
-        try:
-            url = res.url
-            ct = res.headers.get("content-type", "").lower()
+    def process_url(url):
+        u = url.lower()
+        if any(bad in u for bad in [".mp4", ".jpg", ".png", "waiting", "loop", "saba.m3u8", "/ad/", "/ads/", "/vast/", "quangcao", "banner"]):
+            return
             
-            # CHIẾU MỚI 1: Quét thẳng vào gói tin JSON (Cách Hội Quán giấu link)
-            if "json" in ct:
-                body = res.text()
-                # Tìm mọi chuỗi giống link m3u8 trong JSON
-                found = re.findall(r'(https?://[^\s"\'<>]+m3u8[^\s"\'<>]*)', body)
-                for f in found: 
-                    streams.add(f.replace('\\/', '/'))
+        # Thêm tên miền 100ycdn.com từ ảnh của bạn vào danh sách săn lùng
+        if (".m3u8" in u or "taoxanh.biz" in u or "rapidlive.shop" in u 
+            or "edgemaxcdn.org" in u or "100ycdn.com" in u or "hqtv" in u or "live-stream" in u):
+            streams.add(url)
+            print(f"      🎯 TÓM ĐƯỢC: {url[:70]}...")
 
-            if ".m3u8" in url.lower() or "mpegurl" in ct or "apple.mpegurl" in ct:
-                streams.add(url)
-        except:
-            pass
-
-    page.on("response", handle_response)
+    page.on("request", lambda req: process_url(req.url))
+    page.on("response", lambda res: process_url(res.url))
 
     try:
-        # Bẻ khóa Fetch/XHR
         page.add_init_script("""
         (() => {
             const origFetch = window.fetch;
             window.fetch = async (...args) => {
+                if (typeof args[0] === 'string') console.log('FETCH_HOOK:', args[0]);
                 return origFetch(...args);
-            };
-            const origOpen = XMLHttpRequest.prototype.open;
-            XMLHttpRequest.prototype.open = function(method, url) {
-                return origOpen.apply(this, arguments);
             };
         })();
         """)
 
-        page.goto(match_url, wait_until="domcontentloaded", timeout=60000)
-        page.wait_for_timeout(3000)
+        page.goto(match_url, wait_until="load", timeout=60000)
+        page.wait_for_timeout(4000)
 
-        # CHIÊU MỚI 2: Quét toàn bộ HTML thô của trang để vét link ẩn
         try:
-            html = page.content()
-            found_in_html = re.findall(r'(https?://[^\s"\'<>]+m3u8[^\s"\'<>]*)', html)
-            for f in found_in_html:
-                streams.add(f.replace('\\/', '/'))
+            html_content = page.content()
+            hidden_links = re.findall(r'(https?://[^\s"\'<>]+(?:m3u8|taoxanh\.biz|rapidlive\.shop|edgemaxcdn\.org|100ycdn\.com|hqtv)[^\s"\'<>]*)', html_content)
+            for hl in hidden_links:
+                process_url(hl.replace('\\/', '/'))
         except: pass
 
-        # Phá lớp chống click
         try:
             page.evaluate("""
             document.querySelectorAll('*').forEach(el => {
@@ -180,44 +168,41 @@ def capture_stream(context, match_url):
             """)
         except: pass
 
-        # Click phá quảng cáo
         try:
             vp = page.viewport_size
             if vp:
                 cx, cy = vp["width"] // 2, vp["height"] // 2
-                page.mouse.click(cx, cy)
-                page.wait_for_timeout(1000)
-                page.mouse.click(cx, cy)
+                for _ in range(3):
+                    page.mouse.click(cx, cy)
+                    page.wait_for_timeout(800)
         except: pass
 
-        # Ép Iframe Play
         for frame in page.frames:
             try:
                 frame.evaluate("""
                 document.querySelectorAll('video').forEach(v => {
                     v.muted = true;
-                    const p = v.play();
-                    if (p !== undefined) p.catch(()=>{});
+                    v.play().catch(()=>{});
                 });
                 """)
             except: pass
 
         deadline = time.time() + 15
         while time.time() < deadline:
-            # Thoát ngay lập tức nếu tóm được luồng xịn
-            if any("token=" in s.lower() or "sign=" in s.lower() or "edgemax" in s.lower() for s in streams):
+            # Rút lui sớm nếu chộp được link có wsSession
+            if any("token=" in s.lower() or "sign=" in s.lower() or "wssession=" in s.lower() or "100ycdn" in s.lower() for s in streams):
                 break
             time.sleep(1)
 
     except PWTimeout:
-        print("      ⚠️ TIMEOUT")
+        print("      ⚠️ TIMEOUT TRANG")
     except Exception as e:
         print("      ❌ STREAM ERROR:", e)
     finally:
         page.close()
 
     # ==================================
-    # BỘ CHẤM ĐIỂM THÔNG MINH
+    # BỘ CHẤM ĐIỂM SIÊU TRÍ TUỆ
     # ==================================
     if streams:
         priority = []
@@ -225,38 +210,25 @@ def capture_stream(context, match_url):
             score = 0
             lower = s.lower()
             
-            # TRỊ BỆNH BÚN CHẢ: Phạt thẻ đỏ các link nền, link chờ trùng lặp
-            if any(bad in lower for bad in ["waiting", "loop", "placeholder", "fallback", "saba.m3u8"]):
-                score -= 5000
+            # Server Cấp 1 (Chấm điểm tối đa cho tên miền Hội Quán)
+            if "100ycdn.com" in lower: score += 6000
+            if "edgemaxcdn.org" in lower or "hqtv" in lower: score += 5000
+            if "taoxanh.biz" in lower: score += 4000
+            if "rapidlive.shop" in lower: score += 4000
+            
+            # Cấu trúc link Xịn (Bổ sung wsSession)
+            if any(k in lower for k in ["expire=", "sign=", "token=", "wssession="]): score += 1000
+            if "playlist.m3u8" in lower: score += 500
+            elif "index.m3u8" in lower or "chunklist" in lower: score += 200
                 
-            # Đánh giá cao link Hội Quán
-            if "edgemaxcdn" in lower or "hqtv" in lower:
-                score += 3000
-                
-            # Đánh giá cao link có bảo mật chuẩn (Xoilac)
-            if "expire=" in lower or "sign=" in lower or "token=" in lower:
-                score += 1000
-                
-            if "playlist.m3u8" in lower:
-                score += 500
-            elif "index.m3u8" in lower or "chunklist" in lower:
-                score += 100
-                
-            # Cấm ngặt quảng cáo
-            if any(bad in lower for bad in ["/ad/", "/ads/", "/vast/", "quangcao", "preroll", "banner"]):
-                score -= 10000
-
             priority.append((score, s))
 
         priority.sort(reverse=True, key=lambda x: x[0])
         best_score, best_url = priority[0]
 
-        if best_score > -5000:
-            print(f"      ✅ TÌM THẤY LUỒNG: {best_url[:60]}...")
-            return best_url
-        else:
-            print("      ⚠️ CHỈ TÌM THẤY LUỒNG RÁC/CHỜ")
-            
+        print(f"      ✅ CHỐT LINK CHUẨN: {best_url[:70]}...")
+        return best_url
+
     return None
 
 # =========================================================
@@ -334,9 +306,6 @@ def scrape_and_push():
             ignore_https_errors=True
         )
 
-        # =======================================
-        # BƯỚC 1 & 2: LẤY DANH SÁCH TỪNG KÊNH
-        # =======================================
         for channel in CHANNELS:
             print(f"\n📺 ĐANG QUÉT KÊNH: {channel['name'].upper()}")
             page = context.new_page()
@@ -355,7 +324,6 @@ def scrape_and_push():
             links = []
             seen = set()
 
-            # Quét tìm Link chứa -vs-
             for el in page.locator("a[href*='-vs-']").all():
                 href = el.get_attribute("href")
                 if not href or "-vs-" not in href or href in seen: continue
@@ -407,9 +375,6 @@ def scrape_and_push():
 
             page.close()
 
-        # =======================================
-        # BƯỚC 3: BẮT LUỒNG M3U8 (CHỈ TRẬN LIVE)
-        # =======================================
         print("\n🎥 TIẾN HÀNH BẮT LUỒNG...")
         for channel in CHANNELS:
             live_matches = [m for m in all_channel_data[channel["id"]] if m["is_live"]]
