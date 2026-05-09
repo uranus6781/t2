@@ -1,6 +1,6 @@
 {
   "playlist_name": "Sáng TV",
-  "last_updated": "18:57 09/05/2026",
+  "last_updated": "19:03 09/05/2026",
   "total_live": 15,
   "total_streams": 0,
   "matches": [
@@ -110,19 +110,6 @@
     },
     {
       "id": "9",
-      "title": "Olimpia Cluj W vs Asu Politehnica Timisoara W",
-      "doi_nha": "Olimpia Cluj W",
-      "doi_khach": "Asu Politehnica Timisoara W",
-      "trang_thai": "Đang trực tiếp 🔴",
-      "is_live": true,
-      "thoi_gian": "17:00 09/05/2026",
-      "logo_nha": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-      "logo_khach": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-      "link_xem": "https://bunchatv4.net/truc-tiep/olimpia-cluj-w-vs-asu-politehnica-timisoara-w-1700-09-05-2026/601445329",
-      "stream_url": "https://example.com/video-cho.mp4"
-    },
-    {
-      "id": "10",
       "title": "Fc Bukovyna Chernivtsi vs Fc Vorskla Poltava",
       "doi_nha": "Fc Bukovyna Chernivtsi",
       "doi_khach": "Fc Vorskla Poltava",
@@ -135,7 +122,7 @@
       "stream_url": "https://example.com/video-cho.mp4"
     },
     {
-      "id": "11",
+      "id": "10",
       "title": "Taipei Brao Women vs Taichung Blue Whale W",
       "doi_nha": "Taipei Brao Women",
       "doi_khach": "Taichung Blue Whale W",
@@ -148,7 +135,7 @@
       "stream_url": "https://example.com/video-cho.mp4"
     },
     {
-      "id": "12",
+      "id": "11",
       "title": "Kaohsiung Attackersw vs Taichung Sakura W",
       "doi_nha": "Kaohsiung Attackersw",
       "doi_khach": "Taichung Sakura W",
@@ -161,7 +148,7 @@
       "stream_url": "https://example.com/video-cho.mp4"
     },
     {
-      "id": "13",
+      "id": "12",
       "title": "Darwin Olympics vs Mindil Aces",
       "doi_nha": "Darwin Olympics",
       "doi_khach": "Mindil Aces",
@@ -174,7 +161,7 @@
       "stream_url": "https://example.com/video-cho.mp4"
     },
     {
-      "id": "14",
+      "id": "13",
       "title": "Pfk Montana vs Lokomotiv Sofia",
       "doi_nha": "Pfk Montana",
       "doi_khach": "Lokomotiv Sofia",
@@ -187,16 +174,29 @@
       "stream_url": "https://example.com/video-cho.mp4"
     },
     {
-      "id": "15",
-      "title": "Parma U20 vs Ac Milan U20",
-      "doi_nha": "Parma U20",
-      "doi_khach": "Ac Milan U20",
+      "id": "14",
+      "title": "Eintracht Braunschweig vs Dynamo Dresden",
+      "doi_nha": "Eintracht Braunschweig",
+      "doi_khach": "Dynamo Dresden",
       "trang_thai": "Đang trực tiếp 🔴",
       "is_live": true,
       "thoi_gian": "18:00 09/05/2026",
       "logo_nha": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
       "logo_khach": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
-      "link_xem": "https://bunchatv4.net/truc-tiep/parma-u20-vs-ac-milan-u20-1800-09-05-2026/601445362",
+      "link_xem": "https://bunchatv4.net/truc-tiep/eintracht-braunschweig-vs-dynamo-dresden-1800-09-05-2026/601445368",
+      "stream_url": "https://example.com/video-cho.mp4"
+    },
+    {
+      "id": "15",
+      "title": "Lysekloster vs Pors Grenland",
+      "doi_nha": "Lysekloster",
+      "doi_khach": "Pors Grenland",
+      "trang_thai": "Đang trực tiếp 🔴",
+      "is_live": true,
+      "thoi_gian": "18:00 09/05/2026",
+      "logo_nha": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+      "logo_khach": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+      "link_xem": "https://bunchatv4.net/truc-tiep/lysekloster-vs-pors-grenland-1800-09-05-2026/601445386",
       "stream_url": "https://example.com/video-cho.mp4"
     }
   ]
