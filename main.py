@@ -15,13 +15,18 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
-LIMIT_MATCHES = 15 # Tăng số lượng quét cho đủ danh sách của bạn
+LIMIT_MATCHES = 15
 
 # Ép cứng múi giờ Việt Nam (UTC+7)
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
 LOGO_CACHE = {}
-_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+# Nâng cấp Header giống người thật 100% để lách qua các API cấm Bot
+_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7",
+}
 
 # ==========================================
 # CHUẨN HÓA TÊN ĐỘI
@@ -52,10 +57,13 @@ def _logo_espn(team_name: str) -> str | None:
     return None
 
 def _logo_fotmob(team_name: str) -> str | None:
+    # Nâng cấp: Phân tích trực tiếp JSON của FotMob thay vì dò Regex
     try:
         r = requests.get("https://apigw.fotmob.com/searchapi/suggest", params={"term": team_name, "lang": "vi"}, headers=_HEADERS, timeout=4)
-        match = re.search(r'"id"\s*:\s*"?(\d+)"?\s*,\s*"type"\s*:\s*"team"', r.text)
-        if match: return f"https://images.fotmob.com/image_resources/logo/teamlogo/{match.group(1)}.png"
+        data = r.json()
+        teams = data.get("suggest", {}).get("team", [])
+        if teams and teams[0].get("id"):
+            return f"https://images.fotmob.com/image_resources/logo/teamlogo/{teams[0]['id']}.png"
     except: pass
     return None
 
@@ -95,7 +103,7 @@ def parse_url_to_info(url: str) -> tuple[str, str, str]:
         return "Unknown", "Unknown", "Unknown"
 
 # ==========================================
-# BẮT LUỒNG M3U8 (VÁ LỖI XOILAC ANTI-ADBLOCK VÀ IFRAME)
+# BẮT LUỒNG M3U8 (CHIẾN THUẬT PHÁ GIÁP QUẢNG CÁO)
 # ==========================================
 def capture_stream(context, match_url: str) -> str | None:
     page = context.new_page()
@@ -105,55 +113,53 @@ def capture_stream(context, match_url: str) -> str | None:
         url = req.url.lower()
         if ".mp4" in url: return
         if ".m3u8" in url or ".flv" in url:
-            # Lọc sơ bộ các link rác
-            if "ad" in url and "live" not in url: return
+            # Loại bỏ các file m3u8 rác của quảng cáo
+            if "ad" in url and "live" not in url and "index" not in url: return
             if req.url not in streams:
                 streams.append(req.url)
 
     try:
         page.on("request", on_request)
         
-        # BỎ CHẶN MẠNG! Dùng domcontentloaded để vào thẳng trang.
-        page.goto(match_url, wait_until="domcontentloaded", timeout=45000)
+        # Đợi "load" để đảm bảo các iframe trình phát được tải xong hoàn toàn
+        page.goto(match_url, wait_until="load", timeout=45000)
         page.wait_for_timeout(3000)
 
-        # 1. Ép tất cả các frame (kể cả iframe) play video
+        # 1. Bơm JS: Ép xóa sạch các lớp phủ (overlay, pop-up) đang chặn click
         try:
-            for frame in page.frames:
-                frame.evaluate("""
-                    document.querySelectorAll('video').forEach(v => {
-                        v.muted = true; 
-                        v.play().catch(() => {}); 
-                    });
-                """)
+            page.evaluate("""
+                document.querySelectorAll('div[style*="z-index"]').forEach(e => {
+                    if (window.getComputedStyle(e).zIndex > 100) e.remove();
+                });
+            """)
         except: pass
 
-        # 2. Click bạo lực vào tâm màn hình và nhích lên một chút để trúng Iframe Player
+        # 2. Bạo lực Click: Bấm giữa màn hình để KÍCH HOẠT luồng ẩn
         try:
             vp = page.viewport_size
             if vp:
                 cx, cy = vp["width"] / 2, vp["height"] / 2
-                page.mouse.click(cx, cy)
-                page.wait_for_timeout(500)
-                page.mouse.click(cx, cy - 100) 
+                page.mouse.click(cx, cy)        # Click lần 1: Đánh lừa bung Pop-up
+                page.wait_for_timeout(1500)     # Chờ 1.5 giây
+                page.mouse.click(cx, cy - 20)   # Click lần 2: Đập thẳng vào nút Play
         except: pass
         
-        # 3. Quét tìm nút Play ẩn trong TẤT CẢ lớp Iframe
+        # 3. Lục lọi tất cả iframe để ép Play bằng JS (Chống cháy)
         try:
             for frame in page.frames:
-                for sel in [".vjs-big-play-button", ".jw-icon-display", ".play-btn", "#player", ".play-wrapper"]:
-                    btn = frame.locator(sel).first
-                    if btn.is_visible(timeout=500):
-                        btn.click()
-                        break
+                frame.evaluate("""
+                    document.querySelectorAll('video').forEach(v => {
+                        v.muted = true; v.play().catch(()=>{});
+                    });
+                """)
         except: pass
 
-        # Chờ tối đa 15s để lấy luồng
+        # Chờ tối đa 15s để bắt luồng m3u8 trồi lên
         deadline = time.time() + 15
         while time.time() < deadline:
             time.sleep(1)
             if streams:
-                print(f"         ✅ Bắt được nguồn sau {(15 - (deadline - time.time())):.0f}s")
+                print(f"         ✅ ĐÃ TÓM ĐƯỢC M3U8 sau {(15 - (deadline - time.time())):.0f}s")
                 break
 
     except PWTimeout: 
@@ -165,7 +171,7 @@ def capture_stream(context, match_url: str) -> str | None:
     
     if streams:
         live_streams = [s for s in streams if "live" in s.lower()]
-        return (live_streams or streams)[-1]
+        return (live_streams or streams)[-1] # Luôn lấy luồng m3u8 chất lượng cao nhất ở cuối
     return None
 
 # ==========================================
@@ -207,11 +213,16 @@ def scrape_and_push():
     print("=" * 65)
 
     with sync_playwright() as p:
+        # NÂNG CẤP CHỐNG CHẶN BOT TẠI ĐÂY
         browser = p.chromium.launch(headless=True, args=[
             "--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu",
-            "--autoplay-policy=no-user-gesture-required", "--disable-web-security"
+            "--autoplay-policy=no-user-gesture-required", "--disable-web-security",
+            "--disable-blink-features=AutomationControlled" # <-- Vũ khí lừa trang web
         ])
-        ctx = browser.new_context(viewport={"width": 1920, "height": 1080}, user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+        ctx = browser.new_context(
+            viewport={"width": 1920, "height": 1080}, 
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        )
         main_page = ctx.new_page()
 
         print("\n📋 BƯỚC 1: Lấy danh sách trận...")
@@ -240,22 +251,22 @@ def scrape_and_push():
                 if href and not href.startswith("http"): href = "/".join(TARGET_SITE.split("/")[:3]) + href
                 doi_nha, doi_khach, thoi_gian = parse_url_to_info(href)
 
-                # Bóc Logo trực tiếp từ giao diện trang
+                # Nâng cấp lấy logo trực tiếp từ web (Lazy load)
                 logo_nha, logo_khach = "", ""
                 try:
                     imgs = el.locator("img").all()
                     if len(imgs) >= 2:
-                        src_nha = imgs[0].get_attribute("data-src") or imgs[0].get_attribute("src")
-                        src_khach = imgs[1].get_attribute("data-src") or imgs[1].get_attribute("src")
+                        src_nha = imgs[0].get_attribute("data-lazy-src") or imgs[0].get_attribute("data-src") or imgs[0].get_attribute("src")
+                        src_khach = imgs[1].get_attribute("data-lazy-src") or imgs[1].get_attribute("data-src") or imgs[1].get_attribute("src")
                         if src_nha and ".gif" not in src_nha: logo_nha = src_nha if src_nha.startswith("http") else f"https://bunchatv4.net{src_nha}"
                         if src_khach and ".gif" not in src_khach: logo_khach = src_khach if src_khach.startswith("http") else f"https://bunchatv4.net{src_khach}"
                 except: pass
                 
-                # Gọi API dự phòng
+                # Gọi hệ thống cào Logo nếu trên web thiếu ảnh
                 if not logo_nha: logo_nha = get_team_logo(doi_nha)
                 if not logo_khach: logo_khach = get_team_logo(doi_khach)
 
-                # So sánh thời gian thực: Kích hoạt Live từ -10 phút đến +120 phút
+                # Thuật toán LIVE theo thời gian thực (-10 phút)
                 is_live, status = False, "Chưa đá ⏳"
                 try:
                     match_time = datetime.datetime.strptime(thoi_gian, "%H:%M %d/%m/%Y").replace(tzinfo=VN_TZ)
