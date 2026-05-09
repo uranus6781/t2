@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   scrape:
 
     runs-on: ubuntu-22.04
@@ -15,32 +16,23 @@ jobs:
 
     steps:
 
-    # =====================================================
-    # CHECKOUT
-    # =====================================================
     - name: 📥 Checkout
       uses: actions/checkout@v4
 
-    # =====================================================
-    # PYTHON
-    # =====================================================
     - name: 🐍 Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
-    # =====================================================
-    # CACHE PLAYWRIGHT
-    # =====================================================
+    - name: 🌐 Install Chrome
+      uses: browser-actions/setup-chrome@v1
+
     - name: 💾 Cache Playwright
       uses: actions/cache@v4
       with:
         path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-playwright
 
-    # =====================================================
-    # INSTALL DEPENDENCIES
-    # =====================================================
     - name: 📦 Install dependencies
       run: |
 
@@ -50,19 +42,7 @@ jobs:
 
         playwright install --with-deps chromium
 
-    # =====================================================
-    # DEBUG ENV
-    # =====================================================
-    - name: 🔍 Debug Environment
-      run: |
-        python --version
-        pip list
-        playwright --version
-
-    # =====================================================
-    # RUN BOT
-    # =====================================================
-    - name: 🚀 Run scraper
+    - name: 🚀 Run bot
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         GH_REPO: ${{ github.repository }}
@@ -71,17 +51,10 @@ jobs:
 
         python main.py
 
-    # =====================================================
-    # SHOW RESULT
-    # =====================================================
-    - name: 📄 Check result
+    - name: 📄 Show output
       run: |
 
-        echo "===== FILES ====="
-
         ls -la
-
-        echo "===== JSON ====="
 
         if [ -f bongda.json ]; then
 
