@@ -1,7 +1,6 @@
 import os
 import datetime
 import re
-import time
 import requests
 import json
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
@@ -15,19 +14,24 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
-LIMIT_MATCHES = 20
+LIMIT_MATCHES = 30
 
-# Ép cứng múi giờ Việt Nam (UTC+7) cho máy chủ GitHub Actions
+# Ép cứng múi giờ Việt Nam (UTC+7)
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
 LOGO_CACHE = {}
 _HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
+# Danh sách chặn quảng cáo tận gốc (CÁCH CŨ GIÚP LOAD NHANH)
+BLOCKED_DOMAINS = [
+    "googleads", "doubleclick", "facebook", "analytics", "popunder", 
+    "bet", "casino", "ads", "tracker", "histats"
+]
+
 # ==========================================
-# CHUẨN HÓA TÊN ĐỘI (RÚT GỌN)
+# CHUẨN HÓA TÊN ĐỘI
 # ==========================================
 def normalize_team_name(raw: str) -> str:
-    """Chỉ làm sạch các chữ Fc viết sai để API dễ tìm kiếm hơn"""
     cleaned = re.sub(r'\bFc\b$', 'FC', raw)
     cleaned = re.sub(r'\bFootball Club\b', 'FC', cleaned)
     return cleaned.strip()
@@ -96,39 +100,49 @@ def parse_url_to_info(url: str) -> tuple[str, str, str]:
         return "Unknown", "Unknown", "Unknown"
 
 # ==========================================
-# BẮT LUỒNG M3U8 NGUYÊN THỦY (CHUẨN 100%)
+# BẮT LUỒNG M3U8 (CÁCH CŨ: CHẶN TẬN GỐC TÀI NGUYÊN)
 # ==========================================
 def capture_stream(context, match_url: str) -> str | None:
     page = context.new_page()
     streams = []
-    
-    def on_request(req):
-        url = req.url.lower()
-        if ".mp4" in url: return
-        if ".m3u8" in url or ".flv" in url:
-            if req.url not in streams:
-                streams.append(req.url)
+
+    # Hàm đánh chặn mạng (Bóp chết ảnh, CSS, Font và Quảng cáo)
+    def intercept_route(route):
+        url = route.request.url.lower()
+        if route.request.resource_type in ["image", "font", "stylesheet", "media"]:
+            route.abort()
+            return
+        if any(ad in url for ad in BLOCKED_DOMAINS):
+            route.abort()
+            return
+        route.continue_()
+
+    # Hàm bắt luồng
+    def request_handler(request):
+        url = request.url.lower()
+        if ".m3u8" in url and not any(ad in url for ad in BLOCKED_DOMAINS):
+            if request.url not in streams:
+                streams.append(request.url)
 
     try:
-        page.on("request", on_request)
-        page.goto(match_url, timeout=60_000)
-        page.wait_for_timeout(2000)
+        # Bật chặn mạng và lắng nghe
+        page.route("**/*", intercept_route)
+        page.on("request", request_handler)
 
-        try:
-            vp = page.viewport_size
-            if vp: page.mouse.click(vp["width"] / 2, vp["height"] / 2)
-        except: pass
+        page.goto(match_url, timeout=45000)
         
+        # Ép click nút Play
         try:
-            page.evaluate("document.querySelectorAll('video').forEach(v => { v.muted = true; v.play().catch(() => {}); });")
+            play_buttons = [".vjs-big-play-button", ".jw-icon-display", ".play-wrapper", "#player", ".play-btn"]
+            for btn in play_buttons:
+                pb = page.locator(btn).first
+                if pb.is_visible(timeout=2000):
+                    pb.click()
+                    break
         except: pass
 
-        deadline = time.time() + 20
-        while time.time() < deadline:
-            time.sleep(1)
-            if streams:
-                print(f"         ✅ Bắt được nguồn sau {(20 - (deadline - time.time())):.0f}s")
-                break
+        # Chỉ cần đợi 5 giây là luồng sẽ lòi ra vì trang cực nhẹ
+        page.wait_for_timeout(5000)
 
     except PWTimeout: 
         print("         ⚠️  Trang tải quá lâu (Timeout)")
@@ -137,8 +151,10 @@ def capture_stream(context, match_url: str) -> str | None:
     finally:
         page.close()
     
-    live_streams = [s for s in streams if "live" in s.lower()]
-    return (live_streams or streams or [None])[-1]
+    if streams:
+        live_streams = [s for s in streams if "live" in s.lower()]
+        return (live_streams or streams)[-1] # Ưu tiên luồng cuối cùng (thường nét nhất)
+    return None
 
 # ==========================================
 # TẠO JSON & PUSH LÊN GITHUB
@@ -188,8 +204,8 @@ def scrape_and_push():
 
         print("\n📋 BƯỚC 1: Lấy danh sách trận...")
         try:
-            main_page.goto(TARGET_SITE, timeout=60_000)
-            main_page.wait_for_load_state("networkidle", timeout=15_000)
+            main_page.goto(TARGET_SITE, timeout=60000)
+            main_page.wait_for_load_state("networkidle", timeout=15000)
         except Exception as e: print(f"  ⚠️  Load chậm: {e}")
 
         for _ in range(3):
@@ -212,7 +228,6 @@ def scrape_and_push():
                 if href and not href.startswith("http"): href = "/".join(TARGET_SITE.split("/")[:3]) + href
                 doi_nha, doi_khach, thoi_gian = parse_url_to_info(href)
 
-                # Lấy logo từ trang web trước
                 logo_nha, logo_khach = "", ""
                 try:
                     imgs = el.locator("img").all()
