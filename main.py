@@ -1,6 +1,7 @@
 import os
 import datetime
 import re
+import time
 import requests
 import json
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
@@ -14,19 +15,13 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO_NAME = os.getenv("GH_REPO", "Eternal161/dausoco")
 FILE_PATH = "bongda.json"
 WAITING_VIDEO_URL = "https://example.com/video-cho.mp4"
-LIMIT_MATCHES = 30
+LIMIT_MATCHES = 35 # Tăng số lượng quét cho đủ danh sách của bạn
 
 # Ép cứng múi giờ Việt Nam (UTC+7)
 VN_TZ = datetime.timezone(datetime.timedelta(hours=7))
 
 LOGO_CACHE = {}
 _HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-
-# Danh sách chặn quảng cáo tận gốc (CÁCH CŨ GIÚP LOAD NHANH)
-BLOCKED_DOMAINS = [
-    "googleads", "doubleclick", "facebook", "analytics", "popunder", 
-    "bet", "casino", "ads", "tracker", "histats"
-]
 
 # ==========================================
 # CHUẨN HÓA TÊN ĐỘI
@@ -96,53 +91,70 @@ def parse_url_to_info(url: str) -> tuple[str, str, str]:
             thoi_gian, teams_slug = "Chưa có lịch", slug
         parts = teams_slug.split('-vs-', 1)
         return parts[0].replace('-', ' ').title().strip(), parts[1].replace('-', ' ').title().strip() if len(parts) > 1 else "Unknown", thoi_gian
-    except Exception as e:
+    except Exception:
         return "Unknown", "Unknown", "Unknown"
 
 # ==========================================
-# BẮT LUỒNG M3U8 (CÁCH CŨ: CHẶN TẬN GỐC TÀI NGUYÊN)
+# BẮT LUỒNG M3U8 (VÁ LỖI XOILAC ANTI-ADBLOCK VÀ IFRAME)
 # ==========================================
 def capture_stream(context, match_url: str) -> str | None:
     page = context.new_page()
     streams = []
 
-    # Hàm đánh chặn mạng (Bóp chết ảnh, CSS, Font và Quảng cáo)
-    def intercept_route(route):
-        url = route.request.url.lower()
-        if route.request.resource_type in ["image", "font", "stylesheet", "media"]:
-            route.abort()
-            return
-        if any(ad in url for ad in BLOCKED_DOMAINS):
-            route.abort()
-            return
-        route.continue_()
-
-    # Hàm bắt luồng
-    def request_handler(request):
-        url = request.url.lower()
-        if ".m3u8" in url and not any(ad in url for ad in BLOCKED_DOMAINS):
-            if request.url not in streams:
-                streams.append(request.url)
+    def on_request(req):
+        url = req.url.lower()
+        if ".mp4" in url: return
+        if ".m3u8" in url or ".flv" in url:
+            # Lọc sơ bộ các link rác
+            if "ad" in url and "live" not in url: return
+            if req.url not in streams:
+                streams.append(req.url)
 
     try:
-        # Bật chặn mạng và lắng nghe
-        page.route("**/*", intercept_route)
-        page.on("request", request_handler)
-
-        page.goto(match_url, timeout=45000)
+        page.on("request", on_request)
         
-        # Ép click nút Play
+        # BỎ CHẶN MẠNG! Dùng domcontentloaded để vào thẳng trang.
+        page.goto(match_url, wait_until="domcontentloaded", timeout=45000)
+        page.wait_for_timeout(3000)
+
+        # 1. Ép tất cả các frame (kể cả iframe) play video
         try:
-            play_buttons = [".vjs-big-play-button", ".jw-icon-display", ".play-wrapper", "#player", ".play-btn"]
-            for btn in play_buttons:
-                pb = page.locator(btn).first
-                if pb.is_visible(timeout=2000):
-                    pb.click()
-                    break
+            for frame in page.frames:
+                frame.evaluate("""
+                    document.querySelectorAll('video').forEach(v => {
+                        v.muted = true; 
+                        v.play().catch(() => {}); 
+                    });
+                """)
         except: pass
 
-        # Chỉ cần đợi 5 giây là luồng sẽ lòi ra vì trang cực nhẹ
-        page.wait_for_timeout(5000)
+        # 2. Click bạo lực vào tâm màn hình và nhích lên một chút để trúng Iframe Player
+        try:
+            vp = page.viewport_size
+            if vp:
+                cx, cy = vp["width"] / 2, vp["height"] / 2
+                page.mouse.click(cx, cy)
+                page.wait_for_timeout(500)
+                page.mouse.click(cx, cy - 100) 
+        except: pass
+        
+        # 3. Quét tìm nút Play ẩn trong TẤT CẢ lớp Iframe
+        try:
+            for frame in page.frames:
+                for sel in [".vjs-big-play-button", ".jw-icon-display", ".play-btn", "#player", ".play-wrapper"]:
+                    btn = frame.locator(sel).first
+                    if btn.is_visible(timeout=500):
+                        btn.click()
+                        break
+        except: pass
+
+        # Chờ tối đa 15s để lấy luồng
+        deadline = time.time() + 15
+        while time.time() < deadline:
+            time.sleep(1)
+            if streams:
+                print(f"         ✅ Bắt được nguồn sau {(15 - (deadline - time.time())):.0f}s")
+                break
 
     except PWTimeout: 
         print("         ⚠️  Trang tải quá lâu (Timeout)")
@@ -153,7 +165,7 @@ def capture_stream(context, match_url: str) -> str | None:
     
     if streams:
         live_streams = [s for s in streams if "live" in s.lower()]
-        return (live_streams or streams)[-1] # Ưu tiên luồng cuối cùng (thường nét nhất)
+        return (live_streams or streams)[-1]
     return None
 
 # ==========================================
@@ -164,7 +176,7 @@ def create_json(matches_data: list) -> str:
         "playlist_name": "Sáng TV",
         "last_updated": datetime.datetime.now(VN_TZ).strftime("%H:%M %d/%m/%Y"),
         "total_live": sum(1 for m in matches_data if m.get("is_live")),
-        "total_streams": sum(1 for m in matches_data if m.get("luong_video") and m.get("luong_video") != WAITING_VIDEO_URL),
+        "total_streams": sum(1 for m in matches_data if m.get("stream_url") and m.get("stream_url") != WAITING_VIDEO_URL),
         "matches": matches_data,
     }
     return json.dumps(export, indent=2, ensure_ascii=False)
@@ -228,6 +240,7 @@ def scrape_and_push():
                 if href and not href.startswith("http"): href = "/".join(TARGET_SITE.split("/")[:3]) + href
                 doi_nha, doi_khach, thoi_gian = parse_url_to_info(href)
 
+                # Bóc Logo trực tiếp từ giao diện trang
                 logo_nha, logo_khach = "", ""
                 try:
                     imgs = el.locator("img").all()
@@ -238,9 +251,11 @@ def scrape_and_push():
                         if src_khach and ".gif" not in src_khach: logo_khach = src_khach if src_khach.startswith("http") else f"https://bunchatv4.net{src_khach}"
                 except: pass
                 
+                # Gọi API dự phòng
                 if not logo_nha: logo_nha = get_team_logo(doi_nha)
                 if not logo_khach: logo_khach = get_team_logo(doi_khach)
 
+                # So sánh thời gian thực: Kích hoạt Live từ -10 phút đến +120 phút
                 is_live, status = False, "Chưa đá ⏳"
                 try:
                     match_time = datetime.datetime.strptime(thoi_gian, "%H:%M %d/%m/%Y").replace(tzinfo=VN_TZ)
