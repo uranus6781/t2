@@ -1,0 +1,117 @@
+{
+    "playlist_name": "Bún Chả TV - Dậu App",
+    "last_updated": "03:18 09/05/2026",
+    "total_live": 10,
+    "matches": [
+        {
+            "id": "1",
+            "doi_nha": "Mito Hollyhock",
+            "doi_khach": "Urawa Red Diamonds",
+            "logo_nha": "https://ui-avatars.com/api/?name=Mito%20Hollyhock&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Urawa%20Red%20Diamonds&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "12:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "2",
+            "doi_nha": "Jeju Sk Fc",
+            "doi_khach": "Football Club Seoul",
+            "logo_nha": "https://ui-avatars.com/api/?name=Jeju%20Sk%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Football%20Club%20Seoul&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "12:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "3",
+            "doi_nha": "Auckland Fc",
+            "doi_khach": "Adelaide United",
+            "logo_nha": "https://ui-avatars.com/api/?name=Auckland%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Adelaide%20United&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "13:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "4",
+            "doi_nha": "Cerezo Osaka",
+            "doi_khach": "Vvaren Nagasaki",
+            "logo_nha": "https://ui-avatars.com/api/?name=Cerezo%20Osaka&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Vvaren%20Nagasaki&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "14:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "5",
+            "doi_nha": "Gimcheon Sangmu Football Club",
+            "doi_khach": "Incheon United Club",
+            "logo_nha": "https://ui-avatars.com/api/?name=Gimcheon%20Sangmu%20Football%20Club&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Incheon%20United%20Club&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "14:30 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "6",
+            "doi_nha": "Sydney Fc",
+            "doi_khach": "Newcastle Jets",
+            "logo_nha": "https://ui-avatars.com/api/?name=Sydney%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Newcastle%20Jets&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "16:40 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "7",
+            "doi_nha": "Daejeon Citizen",
+            "doi_khach": "Pohang Steelers",
+            "logo_nha": "https://ui-avatars.com/api/?name=Daejeon%20Citizen&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Pohang%20Steelers&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "17:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "8",
+            "doi_nha": "Clb Thanh Hoa",
+            "doi_khach": "Tt Hanoi",
+            "logo_nha": "https://ui-avatars.com/api/?name=Clb%20Thanh%20Hoa&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Tt%20Hanoi&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "18:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "9",
+            "doi_nha": "Ttbd Phu Dong",
+            "doi_khach": "Xm Hai Phong Fc",
+            "logo_nha": "https://ui-avatars.com/api/?name=Ttbd%20Phu%20Dong&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Xm%20Hai%20Phong%20Fc&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "18:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        },
+        {
+            "id": "10",
+            "doi_nha": "Aston Villa W",
+            "doi_khach": "Arsenal W",
+            "logo_nha": "https://ui-avatars.com/api/?name=Aston%20Villa%20W&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "logo_khach": "https://ui-avatars.com/api/?name=Arsenal%20W&size=200&background=1a73e8&color=fff&bold=true&format=png",
+            "thoi_gian": "18:00 09/05/2026",
+            "trang_thai": "Đang trực tiếp",
+            "is_live": true,
+            "stream_url": "https://example.com/video-cho.mp4"
+        }
+    ]
+}
